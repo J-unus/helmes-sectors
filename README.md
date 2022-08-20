@@ -1,1 +1,1 @@
-# helmes-sectors
+# Helmes sectors

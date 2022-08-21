@@ -11,7 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -21,12 +21,9 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 public class SectorClassification extends BaseDomain {
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     SectorClassification parent;
-
-    @Column(nullable = false)
-    String value;
 
     @Column(nullable = false)
     String name;

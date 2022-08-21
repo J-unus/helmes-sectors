@@ -1,18 +1,17 @@
 package sector.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -22,6 +21,7 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 public class Sector extends BaseDomain {
 
+	@JsonIgnoreProperties(value = {"sectors", "hibernateLazyInitializer"})
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "input_data_id")
 	InputData inputData;

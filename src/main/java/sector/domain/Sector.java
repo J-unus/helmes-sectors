@@ -24,9 +24,9 @@ public class Sector extends BaseDomain {
 	@JsonIgnoreProperties(value = {"sectors", "hibernateLazyInitializer"})
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "input_data_id")
-	InputData inputData;
+	private InputData inputData;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "sector_classification_id")
-	SectorClassification sectorClassification;
+	private SectorClassification sectorClassification;
 }

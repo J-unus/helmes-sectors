@@ -24,14 +24,14 @@ import java.util.List;
 public class InputData extends BaseDomain {
 
 	@Column(nullable = false)
-    String name;
+	private String name;
 
 	@Column(nullable = false)
-	boolean agreedToTerms;
+	private boolean agreedToTerms;
 
 	@JsonIgnore
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
 	@OneToMany(mappedBy = "inputData", cascade = CascadeType.PERSIST)
-	List<Sector> sectors;
+	private List<Sector> sectors;
 }

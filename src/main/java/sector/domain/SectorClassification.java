@@ -1,17 +1,25 @@
 package sector.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -21,10 +29,17 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 public class SectorClassification extends BaseDomain {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    SectorClassification parent;
+    private SectorClassification parent;
 
     @Column(nullable = false)
-    String name;
+    private String name;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST)
+    @OrderBy("name")
+    private List<SectorClassification> children;
 }

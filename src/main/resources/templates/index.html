@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <title>Sectors</title>
+    <script type="text/javascript" th:src="@{/static/js/main.js}"></script>
+</head>
+<body>
+
+Please enter your name and pick the Sectors you are currently involved in.
+<br />
+<br />
+Name:
+<input type="text">
+<br />
+<br />
+Sectors:
+<select multiple size="5" th:insert="option-fragment.html :: option" th:with="mainSectorClassifications=${sectorClassifications}, optionPadding=5"></select>
+
+<br />
+<br />
+<input type="checkbox"> Agree to terms
+
+<br />
+<br />
+<input type="submit" value="Save">
+
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var message = [[${sectorClassifications}]];
+    console.log(message);
+
+    /*]]>*/
+</script>

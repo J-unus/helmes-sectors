@@ -1,9 +1,10 @@
-<div th:fragment="option" th:each="sectorClassification : ${mainSectorClassifications}">
-    <option th:unless="${#lists.isEmpty(mainSectorClassifications)}"
-            th:inline="text"
+<div th:fragment="option" th:each="sectorClassification : ${optionSectorClassifications}">
+    <option th:text="${sectorClassification.name}"
+            th:value="${sectorClassification.id}"
             th:style="'padding-left: ' + ${optionPadding} + 'px'">
-        [[${sectorClassification.name}]]
     </option>
 
-    <div th:insert="option-fragment.html :: option" th:with="mainSectorClassifications=${sectorClassification.children}, optionPadding=${optionPadding} + 15"></div>
+    <div th:insert="option-fragment.html :: option"
+         th:with="optionSectorClassifications=${sectorClassification.children}, optionPadding=${optionPadding} + 15">
+    </div>
 </div>

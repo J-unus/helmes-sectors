@@ -7,29 +7,41 @@
 </head>
 <body>
 
-Please enter your name and pick the Sectors you are currently involved in.
-<br />
-<br />
-Name:
-<input type="text">
-<br />
-<br />
-Sectors:
-<select multiple size="5" th:insert="option-fragment.html :: option" th:with="mainSectorClassifications=${sectorClassifications}, optionPadding=5"></select>
+<form action="#" th:action="@{/save}" th:object="${inputData}" method="post">
+    <p>Please enter your name and pick the Sectors you are currently involved in.</p>
 
-<br />
-<br />
-<input type="checkbox"> Agree to terms
+    <label>
+        Name:
+        <input type="text"
+               th:required="required"
+               th:field="*{name}"/>
+    </label><br><br>
 
-<br />
-<br />
-<input type="submit" value="Save">
+    <label>
+        Sectors:
+        <select multiple size="5"
+                th:required="required"
+                th:insert="option-fragment.html :: option"
+                th:with="optionSectorClassifications=${sectorClassifications}, optionPadding=5"
+                th:field="*{sectors}">
+        </select>
+    </label><br><br>
+
+    <label>
+        Agree to terms
+        <input type="checkbox"
+               th:required="required"
+               th:field="*{agreedToTerms}"/>
+    </label><br><br>
+
+    <input type="submit" value="Save"/>
+</form>
 
 </body>
 </html>
 
 
-<script th:inline="javascript">
+<script th:inline="javascript"> // TODO Remove
     /*<![CDATA[*/
 
     var message = [[${sectorClassifications}]];

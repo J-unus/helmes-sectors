@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor // TODO is necessary?
 @AllArgsConstructor
 public class InputData extends BaseDomain {
 
@@ -29,9 +29,6 @@ public class InputData extends BaseDomain {
 	@Column(nullable = false)
 	private boolean agreedToTerms;
 
-	@JsonIgnore
-	@ToString.Exclude
-	@EqualsAndHashCode.Exclude
 	@OneToMany(mappedBy = "inputData", cascade = CascadeType.PERSIST)
 	private List<Sector> sectors;
 }

@@ -1,4 +1,4 @@
-package sector.request.in;
+package sector.util;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Data
-public class InputDataSaveRequest {
+public class InputDataForm {
 
     private Long id;
 

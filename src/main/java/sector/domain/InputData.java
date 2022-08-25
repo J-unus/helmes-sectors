@@ -1,13 +1,11 @@
 package sector.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +18,7 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@NoArgsConstructor // TODO is necessary?
+@NoArgsConstructor
 @AllArgsConstructor
 public class InputData extends BaseDomain {
 

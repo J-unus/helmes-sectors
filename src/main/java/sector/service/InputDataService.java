@@ -1,18 +1,18 @@
 package sector.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 import sector.domain.BaseDomain;
 import sector.domain.InputData;
 import sector.domain.Sector;
 import sector.repository.InputDataRepository;
 import sector.repository.SectorClassificationRepository;
 import sector.repository.SectorRepository;
-import sector.request.in.InputDataSaveRequest;
+import sector.util.AttributeName;
+import sector.util.InputDataForm;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,8 +29,26 @@ public class InputDataService {
 
     private final SectorClassificationRepository sectorClassificationRepository;
 
+    public InputDataForm getInputDataForm(HttpSession session) {
+        Object inputDataId = session.getAttribute(AttributeName.INPUT_DATA_ID);
+        InputDataForm inputDataForm = new InputDataForm();
+
+        if (inputDataId instanceof Long) {
+            InputData inputData = inputDataRepository.getReferenceById((Long) inputDataId);
+            mapInputDataToForm(inputData, inputDataForm);
+        }
+
+        return inputDataForm;
+    }
+
+    private void mapInputDataToForm(InputData inputData, InputDataForm inputDataForm) {
+        inputDataForm.setName(inputData.getName());
+        inputDataForm.setAgreedToTerms(inputData.isAgreedToTerms());
+        inputDataForm.setSectors(inputData.getSectors().stream().map(sector -> sector.getSectorClassification().getId()).toList());
+    }
+
     @Transactional
-    public InputData saveInputDataForm(InputDataSaveRequest request) {
+    public InputData saveInputDataForm(InputDataForm request) {
         InputData inputData = Optional.ofNullable(request.getId())
                 .map(inputDataRepository::getReferenceById)
                 .orElse(new InputData());

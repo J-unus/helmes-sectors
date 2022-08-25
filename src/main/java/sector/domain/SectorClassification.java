@@ -42,4 +42,10 @@ public class SectorClassification extends BaseDomain {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST)
     @OrderBy("name")
     private List<SectorClassification> children;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "sectorClassification", cascade = CascadeType.PERSIST)
+    private List<Sector> sectors;
 }

@@ -1,5 +1,6 @@
 <div th:fragment="option" th:each="sectorClassification : ${optionSectorClassifications}">
     <option th:text="${sectorClassification.name}"
+            th:selected="${sectors?.contains(sectorClassification.id)}"
             th:value="${sectorClassification.id}"
             th:style="'padding-left: ' + ${optionPadding} + 'px'">
     </option>

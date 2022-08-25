@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class InputDataSaveRequest {
 
+    private Long id;
+
     @NotBlank
     private String name;
 

@@ -22,7 +22,7 @@ import javax.persistence.UniqueConstraint;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-// @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"input_data_id", "sector_classification_id"})})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"input_data_id", "sector_classification_id"})})
 public class Sector extends BaseDomain {
 
 	@JsonIgnore

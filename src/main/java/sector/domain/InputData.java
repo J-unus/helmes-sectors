@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -29,6 +28,6 @@ public class InputData extends BaseDomain {
 	private boolean agreedToTerms;
 
 	@Builder.Default
-	@OneToMany(mappedBy = "inputData", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "inputData")
 	private List<Sector> sectors = new ArrayList<>();
 }

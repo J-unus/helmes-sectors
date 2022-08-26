@@ -11,9 +11,11 @@ import sector.repository.SectorClassificationRepository;
 import sector.util.AttributeName;
 import sector.util.InputDataForm;
 import sector.service.InputDataService;
+import sector.util.SessionUtil;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,14 +38,11 @@ public class InputDataController {
 
 	@PostMapping("/save")
 	public String saveInputDataForm(@ModelAttribute @Valid InputDataForm inputDataForm, HttpSession session) {
-		Object inputDataId = session.getAttribute(AttributeName.INPUT_DATA_ID);
-
-		if (inputDataId instanceof Long) {
-			inputDataForm.setId((Long) inputDataId);
-		}
+		Optional<Long> inputDataId = SessionUtil.getInputDataId(session);
+		inputDataId.ifPresent(inputDataForm::setId);
 
 		InputData inputData = inputDataService.saveInputDataForm(inputDataForm);
-		session.setAttribute(AttributeName.INPUT_DATA_ID, inputData.getId());
+		SessionUtil.setInputDataId(session, inputData.getId());
 
 		return REDIRECT_TO_INDEX_TEMPLATE;
 	}

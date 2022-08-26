@@ -2,7 +2,6 @@ package sector.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -21,6 +22,7 @@ import javax.persistence.ManyToOne;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+// @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"input_data_id", "sector_classification_id"})})
 public class Sector extends BaseDomain {
 
 	@JsonIgnore

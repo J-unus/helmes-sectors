@@ -32,9 +32,7 @@ public class SectorService {
 			}
 		});
 
-		if (!savedValues.isEmpty()) {
-			savedValues.values().forEach(sectorRepository::delete);
-		}
+		deleteNotSelectedSectors(savedValues);
 	}
 
 	private void createSector(InputData inputData, Long sectorClassificationId) {
@@ -43,5 +41,11 @@ public class SectorService {
 				.sectorClassification(sectorClassificationRepository.getReferenceById(sectorClassificationId))
 				.build();
 		sectorRepository.save(sector);
+	}
+
+	private void deleteNotSelectedSectors(Map<Long, Sector> notSelectedValues) {
+		if (!notSelectedValues.isEmpty()) {
+			notSelectedValues.values().forEach(sectorRepository::delete);
+		}
 	}
 }

@@ -8,17 +8,17 @@ import java.util.Optional;
 @UtilityClass
 public class SessionUtil {
 
-    public Optional<Long> getInputDataId(HttpSession session) {
-        Object inputDataId = session.getAttribute(AttributeName.INPUT_DATA_ID);
+	public Optional<Long> getInputDataId(HttpSession session) {
+		Object inputDataId = session.getAttribute(AttributeName.INPUT_DATA_ID);
 
-        if (inputDataId instanceof Long) {
-            return Optional.of((Long) inputDataId);
-        }
+		if (inputDataId instanceof Long) {
+			return Optional.of((Long) inputDataId);
+		}
 
-        return Optional.empty();
-    }
+		return Optional.empty();
+	}
 
-    public void setInputDataId(HttpSession session, Long inputDatId) {
-        session.setAttribute(AttributeName.INPUT_DATA_ID, inputDatId);
-    }
+	public void setInputDataId(HttpSession session, Long inputDatId) {
+		session.setAttribute(AttributeName.INPUT_DATA_ID, inputDatId);
+	}
 }

@@ -13,36 +13,36 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class InputDataService {
 
-    private final InputDataRepository inputDataRepository;
+	private final InputDataRepository inputDataRepository;
 
-    private final SectorService sectorService;
+	private final SectorService sectorService;
 
-    public InputDataForm getInputDataForm(HttpSession session) {
-        return SessionUtil.getInputDataId(session)
-                .map(inputDataRepository::getReferenceById)
-                .map(this::mapInputDataToForm)
-                .orElse(new InputDataForm());
-    }
+	public InputDataForm getInputDataForm(HttpSession session) {
+		return SessionUtil.getInputDataId(session)
+				.map(inputDataRepository::getReferenceById)
+				.map(this::mapInputDataToForm)
+				.orElse(new InputDataForm());
+	}
 
-    private InputDataForm mapInputDataToForm(InputData source) {
-        return InputDataForm.builder()
-                .name(source.getName())
-                .agreedToTerms(source.isAgreedToTerms())
-                .selectedSectorClassifications(source.getSectors().stream().map(sector -> sector.getSectorClassification().getId()).toList())
-                .build();
-    }
+	private InputDataForm mapInputDataToForm(InputData source) {
+		return InputDataForm.builder()
+				.name(source.getName())
+				.agreedToTerms(source.isAgreedToTerms())
+				.selectedSectorClassifications(source.getSectors().stream().map(sector -> sector.getSectorClassification().getId()).toList())
+				.build();
+	}
 
-    public void saveInputDataForm(InputDataForm request, HttpSession session) {
-        InputData inputData = SessionUtil.getInputDataId(session)
-                .map(inputDataRepository::getReferenceById)
-                .orElse(new InputData());
+	public void saveInputDataForm(InputDataForm request, HttpSession session) {
+		InputData inputData = SessionUtil.getInputDataId(session)
+				.map(inputDataRepository::getReferenceById)
+				.orElse(new InputData());
 
-        inputData.setName(request.getName());
-        inputData.setAgreedToTerms(request.isAgreedToTerms());
+		inputData.setName(request.getName());
+		inputData.setAgreedToTerms(request.isAgreedToTerms());
 
-        InputData savedInputData = inputDataRepository.save(inputData);
-        sectorService.saveSectorData(savedInputData, request.getSelectedSectorClassifications());
+		InputData savedInputData = inputDataRepository.save(inputData);
+		sectorService.saveSectorData(savedInputData, request.getSelectedSectorClassifications());
 
-        SessionUtil.setInputDataId(session, inputData.getId());
-    }
+		SessionUtil.setInputDataId(session, inputData.getId());
+	}
 }

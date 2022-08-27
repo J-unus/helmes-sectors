@@ -27,7 +27,8 @@ public class InputDataController {
 
 	@GetMapping
 	public String getIndex(Model model, HttpSession session) {
-		model.addAttribute(AttributeName.SECTOR_CLASSIFICATIONS, sectorClassificationRepository.findByParentIdIsNullOrderByName());
+		model.addAttribute(AttributeName.SECTOR_CLASSIFICATIONS,
+				sectorClassificationRepository.findByParentIdIsNullOrderByName());
 		model.addAttribute(AttributeName.INPUT_DATA_FORM, inputDataService.getInputDataForm(session));
 
 		return INDEX_TEMPLATE;

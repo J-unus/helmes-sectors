@@ -27,23 +27,23 @@ import java.util.List;
 @AllArgsConstructor
 public class SectorClassification extends BaseDomain {
 
-    @JsonIgnore
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private SectorClassification parent;
+	@JsonIgnore
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "parent_id")
+	private SectorClassification parent;
 
-    @Column(nullable = false)
-    private String name;
+	@Column(nullable = false)
+	private String name;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST)
-    @OrderBy("name")
-    private List<SectorClassification> children;
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST)
+	@OrderBy("name")
+	private List<SectorClassification> children;
 
-    @JsonIgnore
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "sectorClassification", cascade = CascadeType.PERSIST)
-    private List<Sector> sectors;
+	@JsonIgnore
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	@OneToMany(mappedBy = "sectorClassification", cascade = CascadeType.PERSIST)
+	private List<Sector> sectors;
 }

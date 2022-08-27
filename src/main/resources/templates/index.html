@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th=”http://www.thymeleaf.org”>
 <head>
-    <meta charset="UTF-8">
-    <title>Sectors</title>
+	<meta charset="UTF-8">
+	<title>Sectors</title>
 </head>
 <body>
 
 <form action="#" th:action="@{/save}" th:object="${inputDataForm}" method="post">
-    <p>Please enter your name and pick the Sectors you are currently involved in.</p>
+	<p>Please enter your name and pick the Sectors you are currently involved in.</p>
 
-    <label>
-        Name:
-        <input type="text"
-               th:required="required"
-               th:field="*{name}"/>
-    </label><br><br>
+	<label>
+		Name:
+		<input type="text"
+			   th:required="required"
+			   th:field="*{name}"/>
+	</label><br><br>
 
-    <label>
-        Sectors:
-        <select multiple size="5"
-                th:required="required"
-                th:insert="option-fragment.html :: option"
-                th:with="optionSectorClassifications=${sectorClassifications}, optionPadding=5"
-                th:field="*{selectedSectorClassifications}">
-        </select>
-    </label><br><br>
+	<label>
+		Sectors:
+		<select multiple size="5"
+				th:required="required"
+				th:insert="option-fragment.html :: option"
+				th:with="optionSectorClassifications=${sectorClassifications}, optionPadding=5"
+				th:field="*{selectedSectorClassifications}">
+		</select>
+	</label><br><br>
 
-    <label>
-        Agree to terms
-        <input type="checkbox"
-               th:required="required"
-               th:field="*{agreedToTerms}"/>
-    </label><br><br>
+	<label>
+		Agree to terms
+		<input type="checkbox"
+			   th:required="required"
+			   th:field="*{agreedToTerms}"/>
+	</label><br><br>
 
-    <input type="submit" value="Save"/>
+	<input type="submit" value="Save"/>
 </form>
 
 </body>

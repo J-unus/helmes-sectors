@@ -16,12 +16,12 @@ import java.util.List;
 @AllArgsConstructor
 public class InputDataForm {
 
-    @NotBlank
-    private String name;
+	@NotBlank
+	private String name;
 
-    @AssertTrue
-    private boolean agreedToTerms;
+	@AssertTrue
+	private boolean agreedToTerms;
 
-    @NotEmpty
-    private List<Long> selectedSectorClassifications;
+	@NotEmpty
+	private List<Long> selectedSectorClassifications;
 }

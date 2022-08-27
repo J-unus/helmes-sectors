@@ -22,49 +22,49 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 public class SectorServiceTest {
 
-    @Mock
-    private SectorRepository sectorRepository;
+	@Mock
+	private SectorRepository sectorRepository;
 
-    @Mock
-    private SectorClassificationRepository sectorClassificationRepository;
+	@Mock
+	private SectorClassificationRepository sectorClassificationRepository;
 
-    @InjectMocks
-    private SectorService sectorService;
+	@InjectMocks
+	private SectorService sectorService;
 
-    @Test
-    void saveSectorDataNew() {
-        Long selectedSectorClassification = 12L;
-        InputData inputData = MockResources.createAndPopulateInputData();
-        inputData.setSectors(new ArrayList<>());
+	@Test
+	void saveSectorDataNew() {
+		Long selectedSectorClassification = 12L;
+		InputData inputData = MockResources.createAndPopulateInputData();
+		inputData.setSectors(new ArrayList<>());
 
-        sectorService.saveSectorData(inputData, List.of(selectedSectorClassification));
+		sectorService.saveSectorData(inputData, List.of(selectedSectorClassification));
 
-        verify(sectorClassificationRepository).getReferenceById(selectedSectorClassification);
-        verify(sectorRepository, times(1)).save(any(Sector.class));
-        verify(sectorRepository, never()).delete(any(Sector.class));
-    }
+		verify(sectorClassificationRepository).getReferenceById(selectedSectorClassification);
+		verify(sectorRepository, times(1)).save(any(Sector.class));
+		verify(sectorRepository, never()).delete(any(Sector.class));
+	}
 
-    @Test
-    void saveSectorDataExistsSame() {
-        Long selectedSectorClassification = 25L;
-        InputData inputData = MockResources.createAndPopulateInputData();
+	@Test
+	void saveSectorDataExistsSame() {
+		Long selectedSectorClassification = 25L;
+		InputData inputData = MockResources.createAndPopulateInputData();
 
-        sectorService.saveSectorData(inputData, List.of(selectedSectorClassification));
+		sectorService.saveSectorData(inputData, List.of(selectedSectorClassification));
 
-        verify(sectorClassificationRepository, never()).getReferenceById(selectedSectorClassification);
-        verify(sectorRepository, never()).save(any(Sector.class));
-        verify(sectorRepository, never()).delete(any(Sector.class));
-    }
+		verify(sectorClassificationRepository, never()).getReferenceById(selectedSectorClassification);
+		verify(sectorRepository, never()).save(any(Sector.class));
+		verify(sectorRepository, never()).delete(any(Sector.class));
+	}
 
-    @Test
-    void saveSectorDataExistsDifferent() {
-        Long selectedSectorClassification = 12L;
-        InputData inputData = MockResources.createAndPopulateInputData();
+	@Test
+	void saveSectorDataExistsDifferent() {
+		Long selectedSectorClassification = 12L;
+		InputData inputData = MockResources.createAndPopulateInputData();
 
-        sectorService.saveSectorData(inputData, List.of(selectedSectorClassification));
+		sectorService.saveSectorData(inputData, List.of(selectedSectorClassification));
 
-        verify(sectorClassificationRepository).getReferenceById(selectedSectorClassification);
-        verify(sectorRepository, times(1)).save(any(Sector.class));
-        verify(sectorRepository, times(1)).delete(any(Sector.class));
-    }
+		verify(sectorClassificationRepository).getReferenceById(selectedSectorClassification);
+		verify(sectorRepository, times(1)).save(any(Sector.class));
+		verify(sectorRepository, times(1)).delete(any(Sector.class));
+	}
 }

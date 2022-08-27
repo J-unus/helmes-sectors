@@ -16,32 +16,32 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SectorService {
 
-    private final SectorRepository sectorRepository;
+	private final SectorRepository sectorRepository;
 
-    private final SectorClassificationRepository sectorClassificationRepository;
+	private final SectorClassificationRepository sectorClassificationRepository;
 
-    public void saveSectorData(InputData inputData, List<Long> selectedSectorClassifications) {
-        Map<Long, Sector> savedValues = inputData.getSectors().stream()
-                .collect(Collectors.toMap(sector -> sector.getSectorClassification().getId(), Function.identity()));
+	public void saveSectorData(InputData inputData, List<Long> selectedSectorClassifications) {
+		Map<Long, Sector> savedValues = inputData.getSectors().stream()
+				.collect(Collectors.toMap(sector -> sector.getSectorClassification().getId(), Function.identity()));
 
-        selectedSectorClassifications.forEach(selectedSectorClassification -> {
-            if (savedValues.containsKey(selectedSectorClassification)) {
-                savedValues.remove(selectedSectorClassification);
-            } else {
-                createSector(inputData, selectedSectorClassification);
-            }
-        });
+		selectedSectorClassifications.forEach(selectedSectorClassification -> {
+			if (savedValues.containsKey(selectedSectorClassification)) {
+				savedValues.remove(selectedSectorClassification);
+			} else {
+				createSector(inputData, selectedSectorClassification);
+			}
+		});
 
-        if (!savedValues.isEmpty()) {
-            savedValues.values().forEach(sectorRepository::delete);
-        }
-    }
+		if (!savedValues.isEmpty()) {
+			savedValues.values().forEach(sectorRepository::delete);
+		}
+	}
 
-    private void createSector(InputData inputData, Long sectorClassificationId) {
-        Sector sector = Sector.builder()
-                .inputData(inputData)
-                .sectorClassification(sectorClassificationRepository.getReferenceById(sectorClassificationId))
-                .build();
-        sectorRepository.save(sector);
-    }
+	private void createSector(InputData inputData, Long sectorClassificationId) {
+		Sector sector = Sector.builder()
+				.inputData(inputData)
+				.sectorClassification(sectorClassificationRepository.getReferenceById(sectorClassificationId))
+				.build();
+		sectorRepository.save(sector);
+	}
 }

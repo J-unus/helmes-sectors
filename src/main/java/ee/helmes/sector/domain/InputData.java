@@ -1,6 +1,5 @@
 package ee.helmes.sector.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

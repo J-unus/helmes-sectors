@@ -1,6 +1,5 @@
 package ee.helmes.sector.service;
 
-
 import ee.helmes.sector.domain.InputData;
 import ee.helmes.sector.mock.MockResources;
 import ee.helmes.sector.repository.InputDataRepository;

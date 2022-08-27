@@ -1,6 +1,5 @@
 package ee.helmes.sector.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

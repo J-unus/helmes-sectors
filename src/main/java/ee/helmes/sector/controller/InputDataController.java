@@ -1,15 +1,15 @@
-package sector.controller;
+package ee.helmes.sector.controller;
 
+import ee.helmes.sector.repository.SectorClassificationRepository;
+import ee.helmes.sector.service.InputDataService;
+import ee.helmes.sector.util.AttributeName;
+import ee.helmes.sector.util.InputDataForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import sector.repository.SectorClassificationRepository;
-import sector.service.InputDataService;
-import sector.util.AttributeName;
-import sector.util.InputDataForm;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;

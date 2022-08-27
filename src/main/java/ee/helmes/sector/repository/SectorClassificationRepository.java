@@ -1,7 +1,7 @@
-package sector.repository;
+package ee.helmes.sector.repository;
 
+import ee.helmes.sector.domain.SectorClassification;
 import org.springframework.data.jpa.repository.JpaRepository;
-import sector.domain.SectorClassification;
 
 import java.util.List;
 

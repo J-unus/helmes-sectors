@@ -1,11 +1,11 @@
-package sector.service;
+package ee.helmes.sector.service;
 
+import ee.helmes.sector.repository.InputDataRepository;
+import ee.helmes.sector.util.InputDataForm;
+import ee.helmes.sector.util.SessionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import sector.domain.InputData;
-import sector.repository.InputDataRepository;
-import sector.util.InputDataForm;
-import sector.util.SessionUtil;
+import ee.helmes.sector.domain.InputData;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;

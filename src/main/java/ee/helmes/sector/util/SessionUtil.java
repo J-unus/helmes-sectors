@@ -1,4 +1,4 @@
-package sector.util;
+package ee.helmes.sector.util;
 
 import lombok.experimental.UtilityClass;
 

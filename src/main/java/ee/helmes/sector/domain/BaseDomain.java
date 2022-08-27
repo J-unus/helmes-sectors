@@ -1,4 +1,4 @@
-package sector.domain;
+package ee.helmes.sector.domain;
 
 import lombok.Data;
 

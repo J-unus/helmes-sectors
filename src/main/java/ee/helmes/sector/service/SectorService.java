@@ -1,11 +1,11 @@
-package sector.service;
+package ee.helmes.sector.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import sector.domain.InputData;
-import sector.domain.Sector;
-import sector.repository.SectorClassificationRepository;
-import sector.repository.SectorRepository;
+import ee.helmes.sector.domain.InputData;
+import ee.helmes.sector.domain.Sector;
+import ee.helmes.sector.repository.SectorClassificationRepository;
+import ee.helmes.sector.repository.SectorRepository;
 
 import java.util.List;
 import java.util.Map;

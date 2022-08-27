@@ -60,7 +60,8 @@ public class InputDataServiceTest {
 		assertThat(result.getName()).isEqualTo(inputData.getName());
 		assertThat(result.isAgreedToTerms()).isTrue();
 		assertThat(result.getSelectedSectorClassifications().size()).isEqualTo(1);
-		assertThat(result.getSelectedSectorClassifications().get(0)).isEqualTo(inputData.getSectors().get(0).getSectorClassification().getId());
+		assertThat(result.getSelectedSectorClassifications().get(0))
+				.isEqualTo(inputData.getSectors().get(0).getSectorClassification().getId());
 	}
 
 	@Test

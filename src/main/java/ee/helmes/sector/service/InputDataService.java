@@ -28,7 +28,9 @@ public class InputDataService {
 		return InputDataForm.builder()
 				.name(source.getName())
 				.agreedToTerms(source.isAgreedToTerms())
-				.selectedSectorClassifications(source.getSectors().stream().map(sector -> sector.getSectorClassification().getId()).toList())
+				.selectedSectorClassifications(source.getSectors().stream()
+						.map(sector -> sector.getSectorClassification().getId())
+						.toList())
 				.build();
 	}
 

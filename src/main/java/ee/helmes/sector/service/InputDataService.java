@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import ee.helmes.sector.domain.InputData;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,21 +18,18 @@ public class InputDataService {
     private final SectorService sectorService;
 
     public InputDataForm getInputDataForm(HttpSession session) {
-        InputDataForm inputDataForm = new InputDataForm();
-        Optional<Long> inputDataId = SessionUtil.getInputDataId(session);
-
-        if (inputDataId.isPresent()) {
-            InputData inputData = inputDataRepository.getReferenceById(inputDataId.get());
-            mapInputDataToForm(inputData, inputDataForm);
-        }
-
-        return inputDataForm;
+        return SessionUtil.getInputDataId(session)
+                .map(inputDataRepository::getReferenceById)
+                .map(this::mapInputDataToForm)
+                .orElse(new InputDataForm());
     }
 
-    private void mapInputDataToForm(InputData inputData, InputDataForm inputDataForm) {
-        inputDataForm.setName(inputData.getName());
-        inputDataForm.setAgreedToTerms(inputData.isAgreedToTerms());
-        inputDataForm.setSectors(inputData.getSectors().stream().map(sector -> sector.getSectorClassification().getId()).toList());
+    private InputDataForm mapInputDataToForm(InputData source) {
+        return InputDataForm.builder()
+                .name(source.getName())
+                .agreedToTerms(source.isAgreedToTerms())
+                .selectedSectorClassifications(source.getSectors().stream().map(sector -> sector.getSectorClassification().getId()).toList())
+                .build();
     }
 
     public void saveInputDataForm(InputDataForm request, HttpSession session) {
@@ -45,7 +41,7 @@ public class InputDataService {
         inputData.setAgreedToTerms(request.isAgreedToTerms());
 
         InputData savedInputData = inputDataRepository.save(inputData);
-        sectorService.saveSectorData(savedInputData, request.getSectors());
+        sectorService.saveSectorData(savedInputData, request.getSelectedSectorClassifications());
 
         SessionUtil.setInputDataId(session, inputData.getId());
     }

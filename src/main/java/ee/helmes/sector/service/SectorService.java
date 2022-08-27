@@ -20,15 +20,15 @@ public class SectorService {
 
     private final SectorClassificationRepository sectorClassificationRepository;
 
-    public void saveSectorData(InputData inputData, List<Long> sectorSaveRequests) {
+    public void saveSectorData(InputData inputData, List<Long> selectedSectorClassifications) {
         Map<Long, Sector> savedValues = inputData.getSectors().stream()
                 .collect(Collectors.toMap(sector -> sector.getSectorClassification().getId(), Function.identity()));
 
-        sectorSaveRequests.forEach(sectorSaveRequest -> {
-            if (savedValues.containsKey(sectorSaveRequest)) {
-                savedValues.remove(sectorSaveRequest);
+        selectedSectorClassifications.forEach(selectedSectorClassification -> {
+            if (savedValues.containsKey(selectedSectorClassification)) {
+                savedValues.remove(selectedSectorClassification);
             } else {
-                createSector(inputData, sectorSaveRequest);
+                createSector(inputData, selectedSectorClassification);
             }
         });
 

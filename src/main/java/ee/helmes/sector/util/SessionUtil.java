@@ -18,7 +18,7 @@ public class SessionUtil {
 		return Optional.empty();
 	}
 
-	public void setInputDataId(HttpSession session, Long inputDatId) {
-		session.setAttribute(AttributeName.INPUT_DATA_ID, inputDatId);
+	public void setInputDataId(HttpSession session, Long inputDataId) {
+		session.setAttribute(AttributeName.INPUT_DATA_ID, inputDataId);
 	}
 }

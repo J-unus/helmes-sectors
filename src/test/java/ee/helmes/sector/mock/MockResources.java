@@ -9,15 +9,7 @@ import java.util.List;
 public class MockResources {
 
 	public static InputData createAndPopulateInputData() {
-		SectorClassification sectorClassification = SectorClassification.builder()
-				.name("testClassification")
-				.build();
-		sectorClassification.setId(25L);
-
-		Sector sector = Sector.builder()
-				.sectorClassification(sectorClassification)
-				.build();
-
+		Sector sector = createAndPopulateSector();
 		InputData inputData = InputData.builder()
 				.agreedToTerms(true)
 				.name("testData")
@@ -26,5 +18,20 @@ public class MockResources {
 		sector.setInputData(inputData);
 
 		return inputData;
+	}
+
+	private static SectorClassification createAndPopulateSectorClassification() {
+		SectorClassification sectorClassification = SectorClassification.builder()
+				.name("testClassification")
+				.build();
+		sectorClassification.setId(25L);
+
+		return sectorClassification;
+	}
+
+	private static Sector createAndPopulateSector() {
+		return Sector.builder()
+				.sectorClassification(createAndPopulateSectorClassification())
+				.build();
 	}
 }

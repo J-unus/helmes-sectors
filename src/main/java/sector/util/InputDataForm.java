@@ -10,8 +10,6 @@ import java.util.List;
 @Data
 public class InputDataForm {
 
-    private Long id;
-
     @NotBlank
     private String name;
 

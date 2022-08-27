@@ -6,16 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import sector.domain.InputData;
 import sector.repository.SectorClassificationRepository;
+import sector.service.InputDataService;
 import sector.util.AttributeName;
 import sector.util.InputDataForm;
-import sector.service.InputDataService;
-import sector.util.SessionUtil;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,11 +35,7 @@ public class InputDataController {
 
 	@PostMapping("/save")
 	public String saveInputDataForm(@ModelAttribute @Valid InputDataForm inputDataForm, HttpSession session) {
-		Optional<Long> inputDataId = SessionUtil.getInputDataId(session);
-		inputDataId.ifPresent(inputDataForm::setId);
-
-		InputData inputData = inputDataService.saveInputDataForm(inputDataForm);
-		SessionUtil.setInputDataId(session, inputData.getId());
+		inputDataService.saveInputDataForm(inputDataForm, session);
 
 		return REDIRECT_TO_INDEX_TEMPLATE;
 	}

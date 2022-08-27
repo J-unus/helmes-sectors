@@ -2,7 +2,6 @@ package sector.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import sector.domain.InputData;
 import sector.repository.InputDataRepository;
 import sector.util.InputDataForm;
@@ -37,9 +36,8 @@ public class InputDataService {
         inputDataForm.setSectors(inputData.getSectors().stream().map(sector -> sector.getSectorClassification().getId()).toList());
     }
 
-    @Transactional
-    public InputData saveInputDataForm(InputDataForm request) {
-        InputData inputData = Optional.ofNullable(request.getId())
+    public void saveInputDataForm(InputDataForm request, HttpSession session) {
+        InputData inputData = SessionUtil.getInputDataId(session)
                 .map(inputDataRepository::getReferenceById)
                 .orElse(new InputData());
 
@@ -49,6 +47,6 @@ public class InputDataService {
         InputData savedInputData = inputDataRepository.save(inputData);
         sectorService.saveSectorData(savedInputData, request.getSectors());
 
-        return savedInputData;
+        SessionUtil.setInputDataId(session, inputData.getId());
     }
 }
